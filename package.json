@@ -1,0 +1,23 @@
+{
+  "name": "react-hookless",
+  "version": "1.0.0",
+  "description": "an unusual and yet effective usage of React.js's hooks",
+  "main": "index.mjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ats4u/react-hookless.git"
+  },
+  "keywords": [
+    "react",
+    "hooks"
+  ],
+  "author": "Atsushi Oka",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ats4u/react-hookless/issues"
+  },
+  "homepage": "https://github.com/ats4u/react-hookless#readme"
+}
