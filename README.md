@@ -80,7 +80,7 @@ export function AppView() {
 ```
 
 In case you worry about the life cycle of Your object, I will mention that the
-object you specified to `definePersistentObject()` function survives
+object you specified to `defineModelView()` function survives
 re-renderings.
 
 
