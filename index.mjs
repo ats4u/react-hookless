@@ -1,15 +1,14 @@
-
 import { useState, useRef, createContext, useContext } from "react";
 
 function useRerender() {
-  const [, setState] = useState(0);
+  const [, setState] = useState(true);
   function rerender() {
-    setState((e) => e + 1);
+    setState((e) => !e);
   }
   return rerender;
 }
 
-function useConstructUserClass(factory, rerender) {
+function usePersistentObject(factory, rerender) {
   const ref = useRef(null);
   if (ref.current === null) {
     ref.current = factory(rerender);
@@ -18,20 +17,24 @@ function useConstructUserClass(factory, rerender) {
   return ref.current;
 }
 
-export function definePersistentObject(UserComponent, factory) {
+function definePersistentObject(ObjectConsumer, objectFactory) {
   const context = createContext();
-  function UserClassProvider(props) {
+  function ObjectProvider(props) {
     const rerender = useRerender();
-    const userClass = useConstructUserClass(factory, rerender);
+    const persistentObject = usePersistentObject(objectFactory, rerender);
     return (
-      <context.Provider value={userClass}>
-        <UserComponent />
+      <context.Provider value={persistentObject}>
+        <ObjectConsumer />
       </context.Provider>
     );
   }
-  function useUserClass() {
+  function useObject() {
     return useContext(context);
   }
-  return [UserClassProvider, useUserClass];
+  return [ObjectProvider, useObject];
+}
+
+export function defineModelView(AppView, modelFactory) {
+  return definePersistentObject(AppView, modelFactory);
 }
 
