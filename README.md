@@ -55,7 +55,7 @@ export const [App, useAppModel] = defineModelView(
 );
 ```
 
-Then, build your main component. your object can be accessed with `useAppModel()` hook.
+Then, build your main component. Your object can be accessed with `useAppModel()` hook.
 
 This is actually the only hook you have to use in this framework; other hooks
 are hidden to the hook.
