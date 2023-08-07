@@ -151,13 +151,13 @@ export function defineModelView(AppView, modelFactory) {
 ```
 
 ## The API Reference ##
-```
+```javascript
 import { defineModelView } from "./react-hookless.js";
 export const [App, useAppModel] = defineModelView( AppView, appModelFactory );
 ```
 
-- AppView : Specify the Main Component
-- appModelFactory : A function which creates the model object
+- `AppView` : Specify the Main Component
+- `appModelFactory` : A function which creates the model object
 
 
 ## Conclusion  ##
