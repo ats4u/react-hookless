@@ -1,5 +1,20 @@
-# react-hookless
-An unusual and yet effective usage of React.js' hooks.
+ react-hookless
+==================
+
+**react-hookless** is a new state management library. This is a quite unusual
+and yet efficient usage of React.js' hooks.
+
+In **react-hookless**, you can create a single object without restrictions
+which React.js applications have to follow and the object can be accessed from
+anywhere in your React.js application. The object survives re-renderings so
+that you do not have to care for its life-cycle. The object persists until the
+browser window closes.
+
+In `react-hookless`, the object is called **a model object**.
+
+And call `rerencder()` method when there are any components to be updated
+because the components are built upon the fields of the model object; at
+this point, the React components can be called as views.
 
 [CodeSandbox](https://hgnctd.csb.app/)
 
@@ -178,5 +193,12 @@ excuse my obscured English and I hope my English is good enough for everyone to
 understand my idea.
 
 Thank you very much and see you soon.
+
+
+## History ##
+
+- v1.0.0 Released
+- v1.0.1 Updated README.md
+- v1.0.2 Updated README.md (Tue, 08 Aug 2023 10:41:08 +0900)
 
 
