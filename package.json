@@ -1,6 +1,6 @@
 {
   "name": "react-hookless",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "an unusual and yet effective usage of React.js's hooks",
   "main": "index.mjs",
   "scripts": {

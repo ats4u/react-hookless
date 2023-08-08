@@ -1,8 +1,16 @@
  react-hookless
 ==================
 
+ Features
+----------
 **react-hookless** is a new state management library. This is a quite unusual
 and yet efficient usage of React.js' hooks.
+
+- No framework is required
+- No more stale closure problem
+- No more batch update problem
+- No more fussy tricks to manage rendering triggers indirect way
+- Just call rerender() whenever you want to rerender
 
 In **react-hookless**, you can create a single object without restrictions
 which React.js applications have to follow and the object can be accessed from
@@ -10,28 +18,16 @@ anywhere in your React.js application. The object survives re-renderings so
 that you do not have to care for its life-cycle. The object persists until the
 browser window closes.
 
-In **react-hookless**, the object is called **a model object**.
-
-And call `rerender()` method when there are any components to be updated
-because the components are built upon any fields of the model object; at this
-point, the React components can be called as views.
+In **react-hookless**, the object is called **a model**.  And call `rerender()`
+method when there are any components to be updated because the components are
+built upon any fields of the model object; at this point, the React components
+can be called as **views**.
 
 [CodeSandbox](https://hgnctd.csb.app/)
 
-In this way, you can build your React application as traditional pure
-JavaScritp object and you can manually control when React renders the current
-Virtual DOM tree into HTML DOM tree.
-
-The definition of the object is not restricted by those restriction which is
-defined by React.js. The object which you wrote and created in the application
-survives renderings and persists until the browser window closes.
-
-- No framework is required
-- No more stale closure problem
-- No more batch update problem
-- No more fussy tricks to manage rendering triggers indirect way
-
-You just have to call rerender() whenever you want to rerender.
+In this way, you can build your React application as a traditional pure
+JavaScritp object and you can even manually control when React renders the
+current Virtual DOM tree into HTML DOM tree.
 
 ## The Idea in Short ##
 
@@ -201,5 +197,5 @@ Thank you very much and see you soon.
 - v1.0.1 Updated README.md
 - v1.0.2 Updated README.md (Tue, 08 Aug 2023 10:41:08 +0900)
 - v1.0.3 Updated README.md (Tue, 08 Aug 2023 10:49:17 +0900)
-
+- v1.0.4 Updated README.md (Tue, 08 Aug 2023 16:24:05 +0900)
 
