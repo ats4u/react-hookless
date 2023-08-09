@@ -29,7 +29,7 @@ In this way, you can build your React application as a traditional pure
 JavaScritp object and you can even manually control when React renders the
 current Virtual DOM tree into HTML DOM tree.
 
-## The Idea in Short ##
+## How to Use ##
 
 Define your business logic as a simple pure JavaScript object as:
 
@@ -51,22 +51,22 @@ export class AppModel {
 }
 ```
 
-Then, bind the model object to your main component; in this example, your main
+Then bind the model object to your main component; in this example, your main
 component is named as `AppView`.
 
 `App.js`
 
 ```javascript
-import { defineModelView } from "./react-hookless.js";
-import { AppView } from "./AppView.js";
-import { AppModel } from "./AppModel.js";
+import { defineModelView } from "react-hookless.js";
+import { AppView         } from "./AppView.js";
+import { AppModel        } from "./AppModel.js";
 export const [App, useAppModel] = defineModelView(
   AppView,
   () => new AppModel()
 );
 ```
 
-Then, build your main component. Your object can be accessed with `useAppModel()` hook.
+Then build your main component. Your object can be accessed with `useAppModel()` hook.
 
 This is actually the only hook you have to use in this framework; other hooks
 are hidden to the hook.
@@ -74,13 +74,12 @@ are hidden to the hook.
 `AppView.js`
 
 ```javascript
-import "./styles.css";
 import { useAppModel } from "./App.js";
 
 export function AppView() {
   const appModel = useAppModel();
   return (
-    <div className="App">
+    <div>
       <h1>An Unusual and Yet Very Effective Usage of React.js</h1>
       <div onClick={() => appModel.foo()}>{appModel.fooValue}</div>
       <br />
@@ -95,7 +94,7 @@ object you specified to `defineModelView()` function survives
 re-renderings.
 
 
-Then, render the application object.
+Then render the application object.
 
 ```javascript
 import { StrictMode } from "react";
@@ -163,7 +162,7 @@ export function defineModelView(AppView, modelFactory) {
 
 ## The API Reference ##
 ```javascript
-import { defineModelView } from "./react-hookless.js";
+import { defineModelView } from "react-hookless.js";
 export const [App, useAppModel] = defineModelView( AppView, appModelFactory );
 ```
 
@@ -198,4 +197,5 @@ Thank you very much and see you soon.
 - v1.0.2 Updated README.md (Tue, 08 Aug 2023 10:41:08 +0900)
 - v1.0.3 Updated README.md (Tue, 08 Aug 2023 10:49:17 +0900)
 - v1.0.4 Updated README.md (Tue, 08 Aug 2023 16:24:05 +0900)
+- v1.0.5 Updated README.md (Wed, 09 Aug 2023 17:23:53 +0900)
 
