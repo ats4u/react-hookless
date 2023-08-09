@@ -23,7 +23,7 @@ method when there are any components to be updated because the components are
 built upon any fields of the model object; at this point, the React components
 can be called as **views**.
 
-[CodeSandbox](https://hgnctd.csb.app/)
+[CodeSandbox](https://hx4kvd.csb.app/)
 
 In this way, you can build your React application as a traditional pure
 JavaScritp object and you can even manually control when React renders the
@@ -198,4 +198,5 @@ Thank you very much and see you soon.
 - v1.0.3 Updated README.md (Tue, 08 Aug 2023 10:49:17 +0900)
 - v1.0.4 Updated README.md (Tue, 08 Aug 2023 16:24:05 +0900)
 - v1.0.5 Updated README.md (Wed, 09 Aug 2023 17:23:53 +0900)
+- v1.0.6 Updated README.md (Wed, 09 Aug 2023 20:30:01 +0900)
 
