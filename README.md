@@ -119,10 +119,10 @@ The specified object becomes persistent by using `useRef()` hook and
 the instance is shared by `useContext()` hook.
 
 ```javascript
-import { useState, useRef, createContext, useContext } from "react";
+import * as React from "react";
 
 function useRerender() {
-  const [, setState] = useState(true);
+  const [, setState] = React.useState(true);
   function rerender() {
     setState((e) => !e);
   }
@@ -130,7 +130,7 @@ function useRerender() {
 }
 
 function usePersistentObject(factory, rerender) {
-  const ref = useRef(null);
+  const ref = React.useRef(null);
   if (ref.current === null) {
     ref.current = factory(rerender);
     ref.current.rerender = rerender;
@@ -139,18 +139,21 @@ function usePersistentObject(factory, rerender) {
 }
 
 function definePersistentObject(ObjectConsumer, objectFactory) {
-  const context = createContext();
+  const context = React.createContext();
   function ObjectProvider(props) {
     const rerender = useRerender();
     const persistentObject = usePersistentObject(objectFactory, rerender);
-    return (
-      <context.Provider value={persistentObject}>
-        <ObjectConsumer />
-      </context.Provider>
-    );
+    // return (
+    //   <context.Provider value={persistentObject}>
+    //     <ObjectConsumer />
+    //   </context.Provider>
+    // );
+    return React.createElement( context.Provider, {
+      value : persistentObject
+    }, React.createElement(ObjectConsumer, null));
   }
   function useObject() {
-    return useContext(context);
+    return React.useContext(context);
   }
   return [ObjectProvider, useObject];
 }
@@ -199,4 +202,5 @@ Thank you very much and see you soon.
 - v1.0.4 Updated README.md (Tue, 08 Aug 2023 16:24:05 +0900)
 - v1.0.5 Updated README.md (Wed, 09 Aug 2023 17:23:53 +0900)
 - v1.0.6 Updated README.md (Wed, 09 Aug 2023 20:30:01 +0900)
+- v1.0.7 Removed JSX syntax (Fri, 11 Aug 2023 10:56:13 +0900)
 
