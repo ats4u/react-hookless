@@ -222,10 +222,10 @@ function SomeComponent(props) {
 Here is my two cents; just stick to `useRef()`/`useMemo()` to manage the state
 of your application and whenever you want to update your components, call
 `rerender()`. Just do not let React detect when to rerender.  This effectively
-lets your application survive under the stupid error detection of React which
-enforces every rendering to repeat twice, especially if your application needs
-to start initialization by `useEffect()` hook; you have to be clever enough to
-avoid the infnite rendering loop hell.
+lets your application survive under the error detection of React which enforces
+every rendering to repeat twice, especially if your application needs to start
+initialization by `useEffect()` hook; you have to be very clever to avoid the
+infnite rendering loop.
 
 
 ## Conclusion  ##
