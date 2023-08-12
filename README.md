@@ -7,6 +7,7 @@
 and yet efficient usage of React.js' hooks.
 
 - No framework is required
+- No more infinite rendering loop
 - No more stale closure problem
 - No more batch update problem
 - No more fussy tricks to manage rendering triggers indirect way
@@ -29,7 +30,8 @@ In this way, you can build your React application as a traditional pure
 JavaScritp object and you can even manually control when React renders the
 current Virtual DOM tree into HTML DOM tree.
 
-## How to Use ##
+ How to Use
+-------------
 
 Define your business logic as a simple pure JavaScript object as:
 
@@ -57,7 +59,7 @@ component is named as `AppView`.
 `App.js`
 
 ```javascript
-import { defineModelView } from "react-hookless.js";
+import { defineModelView } from "react-hookless";
 import { AppView         } from "./AppView.js";
 import { AppModel        } from "./AppModel.js";
 export const [App, useAppModel] = defineModelView(
@@ -110,7 +112,8 @@ root.render(
 );
 ```
 
-## The Principle of React-Hookless ##
+ The Principle of React-Hookless
+----------------------------------
 
 The module `react-hookless` is so small that the source code can be exhibited
 in the `README.md` of itsown.
@@ -121,7 +124,7 @@ the instance is shared by `useContext()` hook.
 ```javascript
 import * as React from "react";
 
-function useRerender() {
+export function useRerender() {
   const [, setState] = React.useState(true);
   function rerender() {
     setState((e) => !e);
@@ -163,14 +166,66 @@ export function defineModelView(AppView, modelFactory) {
 }
 ```
 
-## The API Reference ##
+ The API Reference
+---------------------
+### `defineModelView()` ###
 ```javascript
-import { defineModelView } from "react-hookless.js";
+import { defineModelView } from "react-hookless";
 export const [App, useAppModel] = defineModelView( AppView, appModelFactory );
 ```
 
-- `AppView` : Specify the Main Component
-- `appModelFactory` : A function which creates the model object
+- Parameters
+    - `AppView` : Specifing the view component
+    - `appModelFactory` : A function which creates the model object
+- Return Values
+    - `App` : The generated main component which is a view bound to the single
+      model object.
+    - `useAppModel` : The generated hook funcion which is to retrieve the
+      current model object from the view.
+
+### `useRerender()` ###
+```javascript
+function SomeComponent(props) {
+  const rerender = useRerender();
+  const ref = React.useRef({
+    status: "ready"
+  });
+
+  React.useEffect(() => {
+    if (ref.current.status === "ready") {
+      ref.current.status = "started";
+      rerender();
+      setTimeout(() => {
+        ref.current.status = "done";
+        ref.current.value = 42;
+        // Call `rerender()` in case of the timeout was occured while it is
+        // unmounted. If the timeout had been occured before this component was
+        // mounted, rerender() would not be necessary since it would be already
+        // displayed.
+        rerender();
+      }, 5000);
+    }
+    return ()=>{
+      // intentionally sabotarge to clear the timer
+    };
+  }, []);
+
+  return (
+    <>
+      <h1>{ref.current.status}</h1>
+      {ref.current.status === "done" ? <h1>{ref.current.value}</h1> : null}
+    </>
+  );
+}
+```
+
+Here is my two cents; just stick to `useRef()`/`useMemo()` to manage the state
+of your application and whenever you want to update your components, call
+`rerender()`. Just do not let React detect when to rerender.  This effectively
+lets your application survive under the stupid error detection of React which
+enforces every rendering to repeat twice, especially if your application needs
+to start initialization by `useEffect()` hook; you have to be clever enough to
+avoid the infnite rendering loop hell.
 
 
 ## Conclusion  ##
@@ -203,4 +258,6 @@ Thank you very much and see you soon.
 - v1.0.5 Updated README.md (Wed, 09 Aug 2023 17:23:53 +0900)
 - v1.0.6 Updated README.md (Wed, 09 Aug 2023 20:30:01 +0900)
 - v1.0.7 Removed JSX syntax (Fri, 11 Aug 2023 10:56:13 +0900)
+- v1.0.8 Exported `useRerender()` (Sat, 12 Aug 2023 15:57:48 +0900)
+
 

@@ -1,6 +1,6 @@
 import * as React from "react";
 
-function useRerender() {
+export function useRerender() {
   const [, setState] = React.useState(true);
   function rerender() {
     setState((e) => !e);
